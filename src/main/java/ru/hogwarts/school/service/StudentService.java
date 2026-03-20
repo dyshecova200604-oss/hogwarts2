@@ -1,8 +1,6 @@
 package ru.hogwarts.school.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.exception.StudentNotFoundException;
@@ -18,7 +16,6 @@ import java.util.List;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
-
 @Service
 public class StudentService {
 
@@ -27,6 +24,7 @@ public class StudentService {
 
     private final AvatarRepository avatarRepository;
     private final StudentRepository studentRepository;
+    private Long studentId;
 
     public StudentService(AvatarRepository avatarRepository, StudentRepository studentRepository) {
         this.avatarRepository = avatarRepository;
@@ -45,6 +43,7 @@ public class StudentService {
     }
 
     public Student updateStudent(Long studentId, String name, int age) {
+        this.studentId = studentId;
         Student student = new Student();
         student.setName(name);
         student.setAge(age);
@@ -65,7 +64,6 @@ public class StudentService {
                 () -> new StudentNotFoundException("Student not found with id: " + studentId));
         return student.getFaculty();
     }
-
     public Student findStudent(Long id) {
         return studentRepository.findById(id).orElseThrow();
     }
@@ -102,7 +100,5 @@ public class StudentService {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
-    public Page<Avatar> getAllAvatars(Pageable pageable) {
-        return avatarRepository.findAll(pageable);
-    }
+
 }

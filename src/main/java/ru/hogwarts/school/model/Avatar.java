@@ -3,8 +3,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Lob;
-import jakarta.persistence.OneToOne;
-
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -13,15 +11,20 @@ public class Avatar {
     @Id
     @GeneratedValue
     private Long id;
-    private String filePath, mediaType;
+    private String filePath;
+    private String mediaType;
+    private Student student;
 
     @Lob
     private byte[] data;
+    private long size;
+    private Student student1;
 
-    public Avatar(Long id, String filePath, String mediaType, long fileSize, Student student) {
+    public Avatar(Long id, String filePath, String mediaType, long ignoredFileSize, Student student) {
         this.id = id;
         this.filePath = filePath;
         this.mediaType = mediaType;
+        this.student = student;
     }
 
     public Avatar() {
@@ -29,12 +32,14 @@ public class Avatar {
     }
 
     public void setStudent(Student student) {
+        student1 = student;
     }
 
     public void setFilePath(String string) {
     }
 
     public void setFileSize(long size) {
+        this.size = size;
     }
 
     public void setMediaType(String contentType) {

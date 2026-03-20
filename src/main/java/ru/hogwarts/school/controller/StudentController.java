@@ -48,6 +48,7 @@ public class StudentController {
         return studentService.getStudentsByAge(age);
     }
 
+
     @GetMapping("/{id}")
     public Faculty getFacultyByStudentId(@PathVariable Long studentId) {
         return studentService.getFacultyByStudentId(studentId);

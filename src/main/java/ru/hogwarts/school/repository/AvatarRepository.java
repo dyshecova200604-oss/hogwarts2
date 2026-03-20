@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface AvatarRepository extends JpaRepository < Avatar, Long > {
     Optional<Avatar> findByStudent_studentId(Long studentId);
     Page<Avatar> findAll(Pageable pageable);
+
 }

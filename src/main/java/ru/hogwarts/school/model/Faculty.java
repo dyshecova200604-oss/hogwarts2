@@ -1,10 +1,8 @@
 
 package ru.hogwarts.school.model;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jdk.jfr.Enabled;
 import java.util.List;
 import java.util.Objects;
 
