@@ -3,31 +3,27 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Lob;
-import jakarta.persistence.OneToOne;
-
-@ru.hogwarts.school.model.NoArgsConstructor
-@ru.hogwarts.school.model.AllArgsConstructor
-
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 public class Avatar {
     @Id
     @GeneratedValue
     private Long id;
-    private String filePath, mediaType;
-    private long fileSize;
+    private String filePath;
+    private String mediaType;
+    private Student student;
 
     @Lob
     private byte[] data;
+    private long size;
+    private Student student1;
 
-    @OneToOne
-    private Student student;
-
-    public Avatar(Long id, String filePath, String mediaType, long fileSize, Student student) {
+    public Avatar(Long id, String filePath, String mediaType, long ignoredFileSize, Student student) {
         this.id = id;
         this.filePath = filePath;
         this.mediaType = mediaType;
-        this.fileSize = fileSize;
         this.student = student;
     }
 
@@ -36,17 +32,31 @@ public class Avatar {
     }
 
     public void setStudent(Student student) {
+        student1 = student;
     }
 
     public void setFilePath(String string) {
     }
 
     public void setFileSize(long size) {
+        this.size = size;
     }
 
     public void setMediaType(String contentType) {
     }
 
     public void setData(byte[] bytes) {
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
