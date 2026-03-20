@@ -11,7 +11,6 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.AvatarRepository;
 import ru.hogwarts.school.repository.StudentRepository;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -99,7 +98,6 @@ public class StudentService {
 
         avatarRepository.save(avatar);
     }
-
     private String getExtension(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }

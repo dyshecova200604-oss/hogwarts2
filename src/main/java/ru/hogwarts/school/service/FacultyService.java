@@ -7,7 +7,6 @@ import ru.hogwarts.school.exception.StudentNotFoundException;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
-
 import java.util.List;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;

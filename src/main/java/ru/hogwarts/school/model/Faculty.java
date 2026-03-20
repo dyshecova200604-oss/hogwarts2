@@ -9,15 +9,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@JsonIgnoreProperties(value = {"students"})
+@JsonIgnoreProperties
 public class Faculty {
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Id
     private Long id;
     private String name;
     private String color;
-    @OneToMany(mappedBy = "faculty")
+    @OneToMany
     @JsonManagedReference
     private List<Student> students;
 
