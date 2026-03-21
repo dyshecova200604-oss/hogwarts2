@@ -8,7 +8,6 @@ import java.util.Objects;
 @Entity
 public class Student {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,11 +21,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(Long id, String name, int age, Faculty faculty) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.faculty = faculty;
+    public Student(long l, String john, int i) {
     }
 
     public Long getId() {
@@ -53,13 +48,6 @@ public class Student {
         this.age = age;
     }
 
-    public Faculty getFaculty() {
-        return faculty;
-    }
-
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -82,4 +70,25 @@ public class Student {
                 '}';
     }
 
+    public void setStudentId(long l) {
+    }
+
+    public Faculty getFaculty() {
+        if (faculty == null) {
+            return new Faculty();
+        } else {
+            return faculty;
+
+        }
+    }
+
+    public void setFaculty(Faculty faculty) {
+        if (faculty == null) {
+            this.faculty = new Faculty();
+        } else {
+            this.faculty = faculty;
+        }
+    }
+
 }
+

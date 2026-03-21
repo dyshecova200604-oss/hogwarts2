@@ -3,9 +3,12 @@ package ru.hogwarts.school.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Id;
 import java.util.List;
 import java.util.Objects;
-
+import jakarta.persistence.GeneratedValue;
 @Entity
 @JsonIgnoreProperties
 public class Faculty {
@@ -27,6 +30,10 @@ public class Faculty {
         this.color = color;
         this.students = students;
     }
+
+    public Faculty(int i, String fenix, String color) {
+    }
+
 
     public Long getId() {
         return id;
@@ -79,5 +86,13 @@ public class Faculty {
                 ", name='" + name + '\'' +
                 ", color='" + color + '\'' +
                 '}';
+    }
+
+    public void setId(long l) {
+        this.id = id;
+    }
+
+    public void setId(int i) {
+
     }
 }

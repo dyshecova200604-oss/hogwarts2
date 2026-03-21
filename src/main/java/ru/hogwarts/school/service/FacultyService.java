@@ -42,11 +42,14 @@ public class FacultyService {
         return facultyRepository.findByColor(color);
     }
 
-    public List<Student> getStudentByFaculty(Long facultyId) {
+    public List<Student> getStudentByFaculty() {
+        Long facultyId = null;
         Faculty faculty = facultyRepository.findById(facultyId).orElseThrow(
                 () -> new FacultyNotFoundException("Faculty not found with id: " + facultyId));
         return faculty.getStudents();
 
 
     }
+
+
 }
