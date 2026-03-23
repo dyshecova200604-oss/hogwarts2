@@ -7,8 +7,6 @@ import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.*;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 @Service
 public class StudentService{
 
@@ -56,23 +54,4 @@ public class StudentService{
         return studentRepository.getStudentsByFacultyName( name );
     }
 
-    public Student getStudentById(long studentId) {
-        return null;
-    }
-
-    public Student createStudent(String name, int age) {
-        return new Student();
-    }
-
-    public Student updateStudent(Long studentId, String name, int age) {
-        return null;
-    }
-
-    public List<Student> getStudentsByAge(int age) {
-        return new ArrayList<>();
-    }
-
-    public Faculty getFacultyByStudentId(Long studentId) {
-        return null;
-    }
 }

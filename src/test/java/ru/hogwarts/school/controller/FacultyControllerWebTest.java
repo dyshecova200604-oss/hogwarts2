@@ -1,16 +1,13 @@
 package ru.hogwarts.school.controller;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.junit.jupiter.MockitoSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,7 +17,6 @@ import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.service.FacultyService;
 import ru.hogwarts.school.service.StudentService;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -36,13 +32,10 @@ public class FacultyControllerWebTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockitoBean
     private FacultyRepository facultyRepository;
 
-    @ru.hogwarts.school.controller.MockitoSpyBean
     private FacultyService facultyService;
 
-    @MockitoSpyBean
     private StudentService studentService;
 
     private Faculty testFaculty;
@@ -154,8 +147,8 @@ public class FacultyControllerWebTest {
     }
 
     @Test
-    public void getFacultyByColor() throws Exception {
-        when(facultyService.getFacultyByColor(any(String.class))).thenReturn((List<Faculty>) testFaculty);
+    public void testFilteredFacultyByColor() throws Exception {
+        when(facultyService.filteredFacultyByColor(any(String.class))).thenReturn(testFaculty);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/faculty/color/" + testFaculty.getColor())
@@ -169,7 +162,7 @@ public class FacultyControllerWebTest {
     @Test
     public void testGetFacultyByStudentsName() throws Exception {
 
-        when(facultyService.getStudentByFaculty());
+        when(facultyService.getFacultiesByStudentsName(any(String.class))).thenReturn(testFaculty);
 
         Student mockStudent = new Student();
         mockStudent.setName("Harry Potter");
