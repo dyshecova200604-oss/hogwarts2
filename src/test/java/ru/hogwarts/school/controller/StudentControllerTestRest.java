@@ -28,7 +28,6 @@ public class StudentControllerTestRest {
 
     @Autowired
     private StudentController studentController;
-
     private String url;
     private Student testStudent;
 

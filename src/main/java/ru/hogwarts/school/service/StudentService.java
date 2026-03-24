@@ -11,11 +11,9 @@ import java.util.*;
 public class StudentService{
 
     private final StudentRepository studentRepository;
-    private final FacultyService facultyService;
 
-    public StudentService(StudentRepository studentRepository, FacultyService facultyService){
+    public StudentService(StudentRepository studentRepository){
         this.studentRepository = studentRepository;
-        this.facultyService = facultyService;
     }
 
     public Student createStudent( Student student) {
@@ -52,6 +50,18 @@ public class StudentService{
 
     public List<Student> getStudentsByFacultyName(String name) {
         return studentRepository.getStudentsByFacultyName( name );
+    }
+
+    public Long countAllStudents() {
+        return studentRepository.countAllStudents();
+    }
+
+    public Integer averageAgeOfStudents() {
+        return studentRepository.averageAgeOfStudents();
+    }
+
+    public List<Student> getFiveLastStudents() {
+        return studentRepository.getFiveLastStudents();
     }
 
 }

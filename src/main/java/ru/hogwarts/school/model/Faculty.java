@@ -10,7 +10,6 @@ import java.util.Objects;
 
 @Entity
 public class Faculty {
-
     @Id
     @GeneratedValue
     private long id;

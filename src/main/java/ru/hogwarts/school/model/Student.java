@@ -63,19 +63,4 @@ public class Student{
         this.age = age;
     }
 
-    public Faculty getFaculty(){
-        if (faculty == null) {
-            return new Faculty();
-        } else {
-            return faculty;
-        }
-    }
-
-    public void setFaculty( Faculty faculty ){
-        if (faculty == null) {
-            this.faculty = new Faculty();
-        } else {
-            this.faculty = faculty;
-        }
-    }
 }

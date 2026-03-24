@@ -51,5 +51,4 @@ public class FacultyService {
     public Faculty getFacultiesByStudentsName(String name) {
         return facultyRepository.getFacultiesByStudentsName(name);
     }
-
 }

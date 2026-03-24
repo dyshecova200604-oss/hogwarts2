@@ -6,8 +6,7 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 
 import java.util.Collection;
-import java.util.Collections; // Добавьте импорт
-import java.util.Objects; // Добавьте импорт
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/faculty")
@@ -29,7 +28,7 @@ public class FacultyController {
         }
     }
 
-    // Эндпоинт для получения всех или фильтрации по имени/цвету
+
     @GetMapping
     public ResponseEntity<Collection<Faculty>> getAllOrFilteredFaculty(
             @RequestParam(required = false) String name,
@@ -47,13 +46,10 @@ public class FacultyController {
         }
     }
 
-    // Этот метод оставим для специфической фильтрации по цвету, если надо вернуть один факультет
-    // Или вы можете удалить его, если getAllOrFilteredFaculty() с параметром color достаточен
+
     @GetMapping("/filtered-by-color/{color}")
     public ResponseEntity<Faculty> getFacultyByColor(@PathVariable String color) {
-        // Этот метод, как я понял из вашего тестового кода, предполагал возврат одного факультета.
-        // Если сервис findFacultyByColor возвращает коллекцию, этот метод нужно будет пересмотреть.
-        // Исхожу из того, что ваш сервис findFacultyByColor может возвращать первый найденный.
+
         Collection<Faculty> faculties = facultyService.findFacultyByColor(color);
         if (faculties == null || faculties.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -69,7 +65,7 @@ public class FacultyController {
         return ResponseEntity.ok(createdFaculty);
     }
 
-    @PutMapping("{id}") // Лучше использовать ID из пути дляPUT
+    @PutMapping("{id}")
     public ResponseEntity<Faculty> editFaculty(@PathVariable long id, @RequestBody Faculty faculty) {
         // Перед обновлением, убедимся, что факультет с таким ID существует
         Faculty existingFaculty = facultyService.findFaculty(id);
@@ -79,9 +75,9 @@ public class FacultyController {
         // Устанавливаем ID, который хотим обновить
         faculty.setId(id);
         Faculty updatedFaculty = facultyService.editFaculty(faculty);
-        // Если сервис вернул null, значит что-то пошло не так (хотя мы уже проверили существование)
+
         if (updatedFaculty == null) {
-            // В идеале, сюда не должны попасть, если findFaculty работает корректно
+
             return ResponseEntity.internalServerError().build();
         }
         return ResponseEntity.ok(updatedFaculty);
@@ -98,8 +94,7 @@ public class FacultyController {
         return ResponseEntity.ok().build(); // Или ResponseEntity.noContent().build();
     }
 
-    // Эндпоинт для поиска по студенту. Если он нужен.
-    // Этот метод не был покрыт тестами, но есть в контроллере.
+
     @GetMapping("/students/{studentName}")
     public ResponseEntity<Faculty> getFacultiesByStudentsName(@PathVariable String studentName) {
         Faculty faculty = facultyService.getFacultiesByStudentsName(studentName);

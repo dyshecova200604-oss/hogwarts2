@@ -33,7 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(StudentController.class)
 public class StudentControllerWebTest {
-
     @Autowired
     private MockMvc mockMvc;
 
