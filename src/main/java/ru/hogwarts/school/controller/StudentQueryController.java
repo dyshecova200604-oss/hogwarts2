@@ -21,7 +21,6 @@ public class StudentQueryController {
     public Long getStudentCount() {
         return studentService.countAllStudents();
     }
-
     @GetMapping("/average-age")
     public Integer getAverageAge() {
         return studentService.averageAgeOfStudents();
