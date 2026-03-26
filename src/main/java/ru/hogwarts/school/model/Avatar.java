@@ -1,62 +1,70 @@
 package ru.hogwarts.school.model;
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Lob;
-@NoArgsConstructor
-@AllArgsConstructor
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 @Entity
 public class Avatar {
+
     @Id
     @GeneratedValue
     private Long id;
-    private String filePath;
-    private String mediaType;
-    private Student student;
 
+    private String filePath;
+    private long fileSize;
+    private String mediaType;
+
+    @JsonIgnore
     @Lob
     private byte[] data;
-    private long size;
-    private Student student1;
 
-    public Avatar(Long id, String filePath, String mediaType, long ignoredFileSize, Student student) {
-        this.id = id;
-        this.filePath = filePath;
-        this.mediaType = mediaType;
-        this.student = student;
-    }
+    @OneToOne
+    private Student student;
 
-    public Avatar() {
-
+    public Student getStudent() {
+        return student;
     }
 
     public void setStudent(Student student) {
-        student1 = student;
+        this.student = student;
     }
 
-    public void setFilePath(String string) {
+    public Long getId() {
+        return id;
     }
-
-    public void setFileSize(long size) {
-        this.size = size;
-    }
-
-    public void setMediaType(String contentType) {
-    }
-
-    public void setData(byte[] bytes) {
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFilePath() {
         return filePath;
     }
 
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public long getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(long fileSize) {
+        this.fileSize = fileSize;
+    }
+
     public String getMediaType() {
         return mediaType;
     }
 
-    public Long getId() {
-        return id;
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
+
+    public byte[] getData() {
+        return data;
+    }
+
+    public void setData(byte[] data) {
+        this.data = data;
     }
 }
