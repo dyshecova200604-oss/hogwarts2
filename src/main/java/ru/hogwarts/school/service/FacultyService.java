@@ -2,6 +2,8 @@ package ru.hogwarts.school.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.stream.LongStream;
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
@@ -63,5 +65,30 @@ public class FacultyService{
     public Faculty getFacultiesByStudentsName(String name){
         logger.info("Was invoked method for getFacultiesByStudentsName {}", name);
         return facultyRepository.getFacultiesByStudentsName(name);
+    }
+    public Faculty getFacultyLongestName(){
+        logger.info("Was invoked method for getFacultyLongestName");
+        return facultyRepository.findAll().stream()
+                .max( (faculty1, faculty2) -> faculty1.getName().length() - faculty2.getName().length() )
+                .orElse(null);
+    }
+    public Long example4() {
+        logger.info("Was invoked method for example4");
+        long startTime1 = System.currentTimeMillis();
+        long sum1 = Stream.iterate(1,a -> a +1)
+                .limit(1_000_000)
+                .reduce(0, (a, b) -> a + b );
+        long endTime1 = System.currentTimeMillis();
+        long duration1 = endTime1 - startTime1;
+        long startTime2 = System.currentTimeMillis();
+        long sum2 = LongStream
+                .rangeClosed(1, 1_000_000)
+                .parallel()
+                .sum();
+        long endTime2 = System.currentTimeMillis();
+        long duration2 = endTime2 - startTime2;
+        logger.info("Example4: duration1 = {}, duration2 = {}", duration1, duration2);
+        logger.info("Example4: sum1 = {}, sum2 = {}", sum1, sum2);
+        return sum2;
     }
 }

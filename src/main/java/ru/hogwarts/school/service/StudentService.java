@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
-
+import static java.util.stream.Collectors.toList;
 import java.util.*;
 
 @Service
@@ -76,6 +76,26 @@ public class StudentService{
     public List<Student> getFiveLastStudents() {
         logger.info("Was invoked method getFiveLastStudents");
         return studentRepository.getFiveLastStudents();
+    }
+    public List<String> findAllNamedStartingWithA() {
+        logger.info("Was invoked method findAllNamedStartingWithA");
+        return studentRepository.findAll().stream()
+                .parallel()
+                .map( student -> student.getName().toUpperCase())
+                .filter(student -> student.startsWith("A"))
+                .sorted()
+                .toList();
+    }
+    public Double avgAgeAllStudents() {
+        logger.info("Was invoked method avgAgeAllStudents");
+        return studentRepository.findAll().stream()
+                .parallel()
+                .mapToInt(student -> student.getAge())
+                .average()
+                .stream()  // Преобразуем OptionalDouble в DoubleStream
+                .map(avg -> Math.round(avg * 100) / 100.0)  // Округляем до 2 знаков после запятой
+                .findFirst()
+                .orElse(0);
     }
 
 }

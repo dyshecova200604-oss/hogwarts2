@@ -60,7 +60,6 @@ public class FacultyController {
     @PostMapping
     public ResponseEntity<Faculty> createFaculty(@RequestBody Faculty faculty) {
         Faculty createdFaculty = facultyService.createFaculty(faculty);
-        // Возвращаем 200 OK с созданным факультетом
         return ResponseEntity.ok(createdFaculty);
     }
 
@@ -103,4 +102,18 @@ public class FacultyController {
             return ResponseEntity.ok(faculty);
         }
     }
+    @GetMapping("/longestName")
+    public ResponseEntity<String> getFacultyLongestName() {
+        Faculty faculty = facultyService.getFacultyLongestName();
+        if (faculty == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(faculty.getName());
+        }
+    }
+    @GetMapping("/example4")
+    public Long example4(){
+        return facultyService.example4();
+    }
+
 }
