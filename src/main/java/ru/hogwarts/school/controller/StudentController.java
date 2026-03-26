@@ -79,5 +79,12 @@ public class StudentController{
     public ResponseEntity<Double> avgAgeAllStudents(){
         return ResponseEntity.ok( studentService.avgAgeAllStudents() );
     }
-
+    @GetMapping("/print-parallel")
+    public ResponseEntity<String> printParallelThreads(){
+        return ResponseEntity.ok( studentService.printParallelThreads() );
+    }
+    @GetMapping("/print-synchronized")
+    public ResponseEntity<String> printSynchronizedThreads(){
+        return ResponseEntity.ok( studentService.printSynchronizedThreads() );
+    }
 }

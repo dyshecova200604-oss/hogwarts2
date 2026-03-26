@@ -97,5 +97,42 @@ public class StudentService{
                 .findFirst()
                 .orElse(0);
     }
-
+    private void doOperation( int i){
+        logger.info("Was invoked method doOperation {}", i);
+        List<Student> students = studentRepository.findAll();
+        System.out.println(students.get(i).getName());
+    }
+    private synchronized void doOperationSynchronized( int i){
+        logger.info("Was invoked method doOperationSynchronized {}", i);
+        List<Student> students = studentRepository.findAll();
+        System.out.println(students.get(i).getName());
+    }
+    public String printParallelThreads() {
+        logger.info("Was invoked method printParallelThreads");
+        doOperation(0);
+        doOperation(1);
+        new Thread(() -> {
+            doOperation(2);
+            doOperation(3);
+        }).start();
+        new Thread(() -> {
+            doOperation(4);
+            doOperation(5);
+        }).start();
+        return "Parallel threads completed";
+    }
+    public String printSynchronizedThreads() {
+        logger.info("Был вызван метод printSynchronizedThreads");
+        doOperationSynchronized(0);
+        doOperationSynchronized(1);
+        new Thread(() -> {
+            doOperationSynchronized(2);
+            doOperationSynchronized(3);
+        }).start();
+        new Thread(() -> {
+            doOperationSynchronized(4);
+            doOperationSynchronized(5);
+        }).start();
+        return "Синхронизация прошла успешно";
+    }
 }
